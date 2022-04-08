@@ -1,0 +1,58 @@
+{% extends 'layerout.html' %}
+
+{% block content %}
+    <div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading" style="font-size: medium">
+            <i class="fa-solid fa-pen-fancy"></i> 添加员工
+        </div>
+        <div class="panel-body">
+
+            <form method="post">
+                <div class="form-group">
+                    <label>员工姓名</label>
+                    <input type="text" class="form-control" name="name" placeholder="姓名">
+                </div>
+                <div class="form-group">
+                    <label>员工账户</label>
+                    <input type="text" class="form-control" name="account" placeholder="账户">
+                </div>
+                <div class="form-group">
+                    <label>密码</label>
+                    <input type="text" class="form-control" name="password" placeholder="密码">
+                </div>
+                <div class="form-group">
+                    <label>年龄</label>
+                    <input type="text" class="form-control" name="age" placeholder="年龄">
+                </div>
+                <div class="form-group">
+                    <label>账户余额</label>
+                    <input type="text" class="form-control" name="salary" placeholder="账户余额">
+                </div>
+                <div class="form-group">
+                    <label>入职时间 </label>
+                    <input type="text" class="form-control" name="create_time" placeholder="XXXX-XX-XX">
+                </div>
+                <div class="form-group">
+                    <label>性别</label>
+                    <select class="form-control">
+                        {% for gender in gender_choices %}
+                        <option name="sex" value={{ gender.0 }}>{{ gender.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>部门ID</label>
+                     <select class="form-control">
+                         {% for depart in department %}
+                        <option  name="depart" value={{ depart.id }}>{{ depart.tittle }}</option>
+                         {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-default" href="/user/list/">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

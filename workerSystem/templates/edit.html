@@ -1,0 +1,65 @@
+{% extends 'layerout.html' %}
+
+{% block content %}
+    <div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading" style="font-size: medium">
+            <i class="fa-solid fa-pen-fancy"></i> 编辑部门
+        </div>
+        <div class="panel-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>部门名称</label>
+                    <input type="text" class="form-control" name="tittle" placeholder="部门" value="{{ row_object.tittle }}">
+                </div>
+
+                <button type="submit" class="btn btn-default" href="/department/">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<div class="container">
+    <a type="button" class="btn btn-default" style="background-color: #2aabd2 ; color: white; margin-bottom: 10px" ,
+       href="/add/department/">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        添加部门
+    </a>
+    <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="background-color: #2aabd2 ; color: white; margin-bottom: 10px">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true" href="/add/department/"></span>添加部门</a>
+    <div class="panel panel-default">
+        <div class="panel-heading" style="font-size: medium">
+            <i class="fa-solid fa-list-ul"></i> 部门系统
+        </div>
+        <table class="table table-hover tab-content">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>部门</th>
+                <th>操作</th>
+            </tr>
+
+            </thead>
+            <tbody>
+            {% for items in departments %}
+                <tr>
+                    {% csrf_token %}
+                    <th scope="row">{{ items.id }}</th>
+                    <td>{{ items.tittle }}</td>
+                    <td>
+                        <a type="button" class="btn btn-sm" style="background-color: #ec971f; color: white" href="/department/{{ items.id }}/edit/">
+                            <i class="fa-solid fa-pen-fancy"></i> 修改
+                        </a>
+                        <a type="button" class="btn btn-sm" style="background-color: #761c19 ; color: white" href="/department/delete/?nid={{ items.id }}">
+                            <i class="fa-solid fa-delete-left"></i></span> 删除
+                        </a>
+                    </td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

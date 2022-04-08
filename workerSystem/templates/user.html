@@ -1,0 +1,63 @@
+{% extends 'layerout.html' %}
+
+{% block content %}
+   <div class="container">
+    <a type="button" class="btn btn-default" style="background-color: #2aabd2 ; color: white; margin-bottom: 10px" ,
+       href="/user/add/">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        添加用户
+    </a>
+   <a type="button" class="btn btn-default" style="background-color: #2aabd2 ; color: white; margin-bottom: 10px" ,
+       href="/user/add/model/">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        添加用户ModelForm
+    </a>
+    <div class="panel panel-default">
+        <div class="panel-heading" style="font-size: medium" >
+            <i class="fa-solid fa-list-ul"></i> 员工系统</div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>姓名</th>
+                <th>账号</th>
+                <th>密码</th>
+                <th>年龄</th>
+                <th>账户余额</th>
+                <th>入职时间</th>
+                <th>性别</th>
+                <th>部门ID</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+             {% for items in users %}
+                <tr>
+                    {% csrf_token %}
+                    <th scope="row">{{ items.id }}</th>
+                    <td>{{ items.name }}</td>
+                    <td>{{ items.account }}</td>
+                    <td>{{ items.password }}</td>
+                    <td>{{ items.age }}</td>
+                    <td>{{ items.salary }}</td>
+
+                    <td>{{ items.create_time|date:"Y-m-d" }}</td>
+                    <td>{{ items.get_sex_display }}</td>
+                    <td>{{ items.depart.tittle }}</td>
+
+                    <td>
+                        <a type="button" class="btn btn-sm" style="background-color: #ec971f; color: white" href="/user/{{ items.id }}/edit/">
+                            <i class="fa-solid fa-pen-fancy"></i> 修改
+                        </a>
+                        <a type="button" class="btn btn-sm" style="background-color: #761c19 ; color: white" href="/user/{{ items.id }}/delete/">
+                            <i class="fa-solid fa-delete-left"></i></span> 删除
+                        </a>
+                    </td>
+
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
